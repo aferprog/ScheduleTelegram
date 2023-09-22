@@ -45,3 +45,25 @@ void Week::update() const
 void Week::remove() const
 {
 }
+
+string Week::getTable() const
+{
+    return "week";
+}
+
+vector<string> Week::getUpdateFields() const
+{
+    return vector<string>();
+}
+
+mysqlx::Row Week::GetUpdateRow() const
+{
+    return mysqlx::Row();
+}
+
+vector<const IEntity*> Week::getChildren() const
+{
+    vector<const IEntity*> res(7);
+    for (int i = 0; i < 7; ++i)
+        res[i] = static_cast<const IEntity*> (days[i].get());
+}

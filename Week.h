@@ -3,8 +3,9 @@
 #include <vector>
 #include "Day.h"
 #include <array>
+#include "IEntity.h"
 
-class Week
+class Week : public IEntity
 {
 	size_t id=-1;
 	size_t user_id = -1;
@@ -17,11 +18,17 @@ public:
 	static std::unique_ptr<Week> create(size_t user_id);
 	size_t getId() const;
 	size_t getUserId() const;
-	//Week& setUserId(size_t user_id);
+
 	const std::array<std::unique_ptr<Day>, 7>& getDays() const;
 	std::array<std::unique_ptr<Day>, 7>& getDays();
 
 	void update() const;
 	void remove() const;
+
+	// Inherited via IEntity
+	virtual string getTable() const override;
+	virtual vector<string> getUpdateFields() const override;
+	virtual mysqlx::Row GetUpdateRow() const override;
+	virtual vector<const IEntity*> getChildren() const override;
 };
 
