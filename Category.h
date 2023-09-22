@@ -6,6 +6,8 @@ class Category
 	std::string name;
 public:
 
+	Category() = default;
+
 	size_t getId() const;
 	size_t getUserId() const;
 	std::string getName() const;

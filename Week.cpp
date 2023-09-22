@@ -1,6 +1,7 @@
 #include "Week.h"
 
 
+
 Week::Week(size_t user_id): user_id(user_id){
 
 }
@@ -12,10 +13,9 @@ std::vector<std::unique_ptr<Week>> Week::getByUserId(size_t user_id)
 
 std::unique_ptr<Week> Week::create(size_t user_id)
 {
-    Week* week = new Week(user_id);
-
-
-
+    std::unique_ptr<Week> week(new Week(user_id));
+    week->create_ent();
+    return week;
 }
 
 size_t Week::getId() const
@@ -66,4 +66,17 @@ vector<const IEntity*> Week::getChildren() const
     vector<const IEntity*> res(7);
     for (int i = 0; i < 7; ++i)
         res[i] = static_cast<const IEntity*> (days[i].get());
+    return res;
+}
+
+vector<string> Week::getCreateField() const
+{
+    return vector<string>{"user_id"};
+}
+
+mysqlx::Row Week::getCreateValues() const
+{
+    mysqlx::Row row;
+    row[0] = user_id;
+    return row;
 }

@@ -3,6 +3,7 @@
 #include <memory>
 #include "Range.h"
 #include "IEntity.h"
+#include <array>
 
 using std::string;
 

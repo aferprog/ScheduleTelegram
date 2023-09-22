@@ -34,10 +34,11 @@ Range& Range::setAction(const std::string& newAction) {
 
 const std::unique_ptr<Category>& Range::getCategory() const
 {
-    // TODO: insert return statement here
+    return category;
 }
 
 std::unique_ptr<Category>& Range::getCategory()
 {
     // TODO: insert return statement here
+    return category;
 }

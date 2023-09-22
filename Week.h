@@ -7,7 +7,7 @@
 
 class Week : public IEntity
 {
-	size_t id=-1;
+	//size_t id=-1;
 	size_t user_id = -1;
 	std::array<std::unique_ptr<Day>, 7> days;
 
@@ -30,5 +30,9 @@ public:
 	virtual vector<string> getUpdateFields() const override;
 	virtual mysqlx::Row GetUpdateRow() const override;
 	virtual vector<const IEntity*> getChildren() const override;
+
+	// Inherited via IEntity
+	virtual vector<string> getCreateField() const override;
+	virtual mysqlx::Row getCreateValues() const override;
 };
 
