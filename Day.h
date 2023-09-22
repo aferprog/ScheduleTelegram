@@ -3,6 +3,7 @@
 #include <memory>
 #include "Range.h"
 
+
 class Day
 {
 	
@@ -15,7 +16,7 @@ class Day
 public:
 	
 	static std::array<std::unique_ptr<Day>, 7> findByWeekId(size_t week_id);
-	static std::unique_ptr<Day> create();
+	// static std::unique_ptr<Day> create();
 
 	size_t getId() const;
 	size_t getWeekId() const;

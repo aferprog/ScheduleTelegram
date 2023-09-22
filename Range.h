@@ -3,8 +3,10 @@
 #include <ctime>
 #include "Category.h"
 #include <memory>
+#include <vector>
 
-//using namespace std;
+using std::unique_ptr;
+using std::vector;
 
 class Range {
 private:
@@ -15,7 +17,8 @@ private:
     std::unique_ptr<Category> category;
 
 public:
-    Range() = default;
+    static unique_ptr<Range> findById(size_t id);
+    static vector<unique_ptr<Range>> findByDayInfoId(size_t day_info_id);
 
     size_t getId() const;
     size_t getCategoryId() const;
