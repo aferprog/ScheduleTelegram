@@ -3,7 +3,7 @@
 std::array<std::unique_ptr<Day>, 7> Day::findByWeekId(size_t week_id)
 {
     Day t;
-    auto rows = t.select_ent({ "id", "week_id", "day_info_id",}, t.getTable(), "week_id="+std::to_string(week_id), "id", 7);
+    auto rows = t.select_ent({ "id", "week_id", "day_info_id"}, t.getTable(), "week_id="+std::to_string(week_id), "id", 7);
     if (rows.count() != 7)
         throw 1;
     std::array<std::unique_ptr<Day>, 7> res;
@@ -68,10 +68,10 @@ std::string Day::getTable() const
 
 void Day::update() const
 {
-    throw 1;
+    update_ent();
 }
 
 void Day::remove() const
 {
-    throw 1;
+    remove_ent();
 }

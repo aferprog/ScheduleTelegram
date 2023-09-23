@@ -10,28 +10,33 @@ using namespace ::mysqlx;
 
 int main(int argc, const char* argv[])
 try {
-    DataBase::initGlobalDB("mysqlx://root:root@127.0.0.1", "schedule");
+    
+    // DataBase::initGlobalDB("mysqlx://root:root@127.0.0.1", "schedule");
 
-    auto res = Week::getByUserId(13);
+    /*auto res = Week::getByUserId(13);
 
     for (auto& week : res) {
         week->remove();
-    }
+    }*/
 
-    /*const char* url = (argc > 1 ? argv[1] : "mysqlx://root:root@127.0.0.1");
+    const char* url = (argc > 1 ? argv[1] : "mysqlx://root:root@127.0.0.1");
     Session sess(url);
     Schema sch = sess.getSchema("schedule");
-    Table table = sch.getTable("week");
-    auto res = table.select("id", "user_id").limit(10).execute();
-    for (auto t : res) {
-        cout << t[0] << ' ' << t[1];
-    }*/
+    Table table = sch.getTable("range");
+    auto res = table.select("begin", "id").orderBy("id").execute();
+    for (auto row : res) {
+        cout << row[1]<<" -> ";
+        for (auto t : row[0].getRawBytes())
+            printf("%hhu:", t);
+        puts("");
+    } 
     /*Row row;
-    row.set(0, 222u);
-    std::vector<std::string> f = { "user_id" };
-    Result res = table.insert(f).values(row).execute();
-    cout << res.getAutoIncrementValue() << endl;
-    cout << "Done!" << endl;*/
+    row.set(0, "12:00:00");
+    row.set(1, 167);
+    std::vector<std::string> f = { "begin", "day_info_id"};
+    Result res = table.insert(f).values(row).execute();*/
+
+    // cout << res.getAffectedItemsCount() << endl;
 }
 catch (const mysqlx::Error& err) {
     cout << "ERROR: " << err << '\n';

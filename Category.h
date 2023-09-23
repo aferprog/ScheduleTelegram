@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
-class Category
+#include "Entity.h"
+
+class Category: public Entity
 {
 	size_t id, user_id;
 	std::string name;
