@@ -3,7 +3,7 @@
 
 
 Week::Week(size_t user_id): user_id(user_id){
-
+    days[0] = nullptr;
 }
 
 std::vector<std::unique_ptr<Week>> Week::getByUserId(size_t user_id)
@@ -41,11 +41,19 @@ size_t Week::getUserId() const
 
 const std::array<std::unique_ptr<Day>, 7>& Week::getDays() const
 {
+    if (days[0])
+        return days;
+
+    const_cast<Week*>(this)->days = Day::findByWeekId(id);
     return days;
 }
 
 std::array<std::unique_ptr<Day>, 7>& Week::getDays()
 {
+    if (days[0])
+        return days;
+
+    days = Day::findByWeekId(id);
     return days;
 }
 

@@ -7,7 +7,7 @@
 
 class Week : public Entity
 {
-	//size_t id=-1;
+	
 	size_t user_id = -1;
 	std::array<std::unique_ptr<Day>, 7> days;
 

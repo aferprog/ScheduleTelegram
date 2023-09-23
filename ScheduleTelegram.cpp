@@ -12,9 +12,10 @@ int main(int argc, const char* argv[])
 try {
     DataBase::initGlobalDB("mysqlx://root:root@127.0.0.1", "schedule");
 
-    auto res = Week::getByUserId(12);
-    for (const auto& week : res) {
-        cout << week->getId()<<endl;
+    auto res = Week::getByUserId(13);
+
+    for (auto& week : res) {
+        week->remove();
     }
 
     /*const char* url = (argc > 1 ? argv[1] : "mysqlx://root:root@127.0.0.1");

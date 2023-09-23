@@ -2,8 +2,20 @@
 
 std::array<std::unique_ptr<Day>, 7> Day::findByWeekId(size_t week_id)
 {
-    std::array<std::unique_ptr<Day>, 7> test;
-    return test;
+    Day t;
+    auto rows = t.select_ent({ "id", "week_id", "day_info_id",}, t.getTable(), "week_id="+std::to_string(week_id), "id", 7);
+    if (rows.count() != 7)
+        throw 1;
+    std::array<std::unique_ptr<Day>, 7> res;
+    int i = 0;
+    for (const auto& row : rows) {
+        res[i].reset(new Day());
+        res[i]->id = row[0];
+        res[i]->week_id = row[1];
+        res[i]->day_info_id = row[2];
+        i++;
+    }
+    return res;
 }
 
 size_t Day::getId() const
