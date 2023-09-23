@@ -34,4 +34,3 @@ protected:
 	virtual const mysqlx::Row getCreateValues() const override;
 
 };
-

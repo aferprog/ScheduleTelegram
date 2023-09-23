@@ -51,3 +51,16 @@ void DataBase::createEntity(const Entity* ent) const
 	
 	const_cast<Entity*>(ent)->id = res.getAutoIncrementValue();
 }
+
+mysqlx::RowResult DataBase::selectEntity(std::vector<std::string> fields, std::string table, std::string condition, std::string order, size_t limit) const
+{
+	auto query = getTable(table).select(fields);
+	if (!condition.empty())
+		query.where(condition);
+	if (!order.empty())
+		query.orderBy(order);
+	if (limit != SIZE_MAX)
+		query.limit(limit);
+
+	return query.execute();
+}

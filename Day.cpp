@@ -11,22 +11,55 @@ size_t Day::getId() const
     return id;
 }
 
-string Day::getTable() const
+size_t Day::getWeekId() const
 {
-    return string();
+    return week_id;
 }
 
-vector<const Entity*> Day::getChildren() const
+size_t Day::getDayInfoId() const
 {
-    return vector<const Entity*>();
+    return day_info_id;
+}
+
+const std::vector<std::unique_ptr<Range>>& Day::getRanges() const
+{
+    return ranges;
+}
+
+std::vector<std::unique_ptr<Range>>& Day::getRanges()
+{
+    return ranges;
 }
 
 const vector<std::string> Day::getCreateField() const
 {
-    return vector<std::string>();
+    throw 1;
 }
 
 const mysqlx::Row Day::getCreateValues() const
 {
-    return mysqlx::Row();
+    throw 1;
+}
+
+vector<const Entity*> Day::getChildren() const
+{
+    vector<const Entity*> res(ranges.size());
+    for (int i = 0; i < res.size(); ++i)
+        res[i] = static_cast<const Entity*> (ranges[i].get());
+    return res;
+}
+
+std::string Day::getTable() const
+{
+    return "day";
+}
+
+void Day::update() const
+{
+    throw 1;
+}
+
+void Day::remove() const
+{
+    throw 1;
 }

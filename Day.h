@@ -27,5 +27,14 @@ public:
 	const std::vector<std::unique_ptr<Range>>& getRanges() const;
 	std::vector<std::unique_ptr<Range>>& getRanges();
 
+	virtual void update() const override;
+	virtual void remove() const override;
+protected:
+	// Inherited via Entity
+	virtual const vector<std::string> getCreateField() const override;
+	virtual const mysqlx::Row getCreateValues() const override;
+	virtual vector<const Entity*> getChildren() const override;
+	virtual std::string getTable() const override;
+
 };
 

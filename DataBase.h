@@ -18,6 +18,8 @@ public:
 	void updateEntity(const Entity* ent) const;
 	void removeEntity(const Entity* ent) const;
 	void createEntity(const Entity* ent) const;
+
+	mysqlx::RowResult selectEntity(std::vector<std::string> fields, std::string table, std::string condition="", std::string order = "", size_t limit = SIZE_MAX) const;
 };
 
 using BDPointer = std::unique_ptr<DataBase>;

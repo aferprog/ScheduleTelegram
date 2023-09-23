@@ -4,11 +4,12 @@
 #include "Category.h"
 #include <memory>
 #include <vector>
+#include "Entity.h"
 
 using std::unique_ptr;
 using std::vector;
 
-class Range {
+class Range: public Entity {
 private:
     size_t id;
     size_t category_id;

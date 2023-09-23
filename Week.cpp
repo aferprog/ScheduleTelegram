@@ -8,7 +8,18 @@ Week::Week(size_t user_id): user_id(user_id){
 
 std::vector<std::unique_ptr<Week>> Week::getByUserId(size_t user_id)
 {
-    return std::vector<std::unique_ptr<Week>>();
+    Week week(user_id);
+    auto rows = week.select_ent({"id"}, week.getTable(), "user_id="+std::to_string(user_id), "id");
+    std::vector<std::unique_ptr<Week>> res;
+
+    for (const auto& row : rows) {
+        res.push_back(
+            std::unique_ptr<Week> (new Week(user_id))
+        );
+        res[res.size() - 1]->id = row[0];
+    }
+
+    return res;
 }
 
 std::unique_ptr<Week> Week::create(size_t user_id)

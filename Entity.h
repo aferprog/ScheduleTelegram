@@ -20,6 +20,7 @@ protected:
 	virtual void update_ent() const;
 	virtual void remove_ent() const;
 	virtual void create_ent() const;
+	virtual mysqlx::RowResult select_ent(std::vector<std::string> fields, std::string table, std::string condition="", std::string order="", size_t limit = SIZE_MAX) const;
 
 	virtual const vector<std::string> getUpdateFields() const;
 	virtual const mysqlx::Row GetUpdateRow() const;
