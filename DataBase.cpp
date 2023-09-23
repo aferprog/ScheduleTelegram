@@ -18,7 +18,7 @@ DataBase::DataBase(string url, string schema)
 	this->schema = schema;
 }
 
-void DataBase::updateEntity(const IEntity* ent) const
+void DataBase::updateEntity(const Entity* ent) const
 {
 	
 	auto query = getTable(ent->getTable()).update();
@@ -36,7 +36,7 @@ void DataBase::updateEntity(const IEntity* ent) const
 		updateEntity(child);
 }
 
-void DataBase::removeEntity(const IEntity* ent) const
+void DataBase::removeEntity(const Entity* ent) const
 {
 	auto query = getTable(ent->getTable()).remove();
 	query.where("id=" + std::to_string(ent->getId()));
@@ -44,10 +44,10 @@ void DataBase::removeEntity(const IEntity* ent) const
 	
 }
 
-void DataBase::createEntity(const IEntity* ent) const
+void DataBase::createEntity(const Entity* ent) const
 {
 	auto table = getTable(ent->getTable());
 	auto res = table.insert(ent->getCreateField()).values(ent->getCreateValues()).execute();
 	
-	const_cast<IEntity*>(ent)->id = res.getAutoIncrementValue();
+	const_cast<Entity*>(ent)->id = res.getAutoIncrementValue();
 }

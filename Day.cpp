@@ -16,17 +16,17 @@ string Day::getTable() const
     return string();
 }
 
-vector<string> Day::getUpdateFields() const
+vector<const Entity*> Day::getChildren() const
 {
-    return vector<string>();
+    return vector<const Entity*>();
 }
 
-mysqlx::Row Day::GetUpdateRow() const
+const vector<std::string> Day::getCreateField() const
+{
+    return vector<std::string>();
+}
+
+const mysqlx::Row Day::getCreateValues() const
 {
     return mysqlx::Row();
-}
-
-vector<const IEntity*> Day::getChildren() const
-{
-    return vector<const IEntity*>();
 }

@@ -38,45 +38,41 @@ std::array<std::unique_ptr<Day>, 7>& Week::getDays()
     return days;
 }
 
-void Week::update() const
-{
-}
-
-void Week::remove() const
-{
-}
 
 string Week::getTable() const
 {
     return "week";
 }
 
-vector<string> Week::getUpdateFields() const
+vector<const Entity*> Week::getChildren() const
 {
-    return vector<string>();
-}
-
-mysqlx::Row Week::GetUpdateRow() const
-{
-    return mysqlx::Row();
-}
-
-vector<const IEntity*> Week::getChildren() const
-{
-    vector<const IEntity*> res(7);
+    vector<const Entity*> res(7);
     for (int i = 0; i < 7; ++i)
-        res[i] = static_cast<const IEntity*> (days[i].get());
+        res[i] = static_cast<const Entity*> (days[i].get());
     return res;
 }
 
-vector<string> Week::getCreateField() const
+const vector<string> Week::getCreateField() const
 {
     return vector<string>{"user_id"};
 }
 
-mysqlx::Row Week::getCreateValues() const
+const mysqlx::Row Week::getCreateValues() const
 {
     mysqlx::Row row;
     row[0] = user_id;
     return row;
 }
+
+void Week::update() const
+{
+    update_ent();
+}
+
+void Week::remove() const
+{
+    remove_ent();
+}
+
+
+

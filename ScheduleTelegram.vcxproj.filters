@@ -36,7 +36,7 @@
     <ClCompile Include="Range.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="IEntity.cpp">
+    <ClCompile Include="Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -59,7 +59,7 @@
     <ClInclude Include="Range.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IEntity.h">
+    <ClInclude Include="Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

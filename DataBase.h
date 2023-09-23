@@ -1,23 +1,23 @@
 #pragma once
 #include <mysqlx/xdevapi.h>
-#include "IEntity.h"
+#include "Entity.h"
 #include <memory>
 
 
 class DataBase
 {
 	std::unique_ptr<mysqlx::Session> session = nullptr;
-	string schema;
+	std::string schema;
 
-	mysqlx::Table getTable(string table_name) const;
+	mysqlx::Table getTable(std::string table_name) const;
 	
 public:
-	static void initGlobalDB(string url, string schema);
-	DataBase(string url, string schema);
+	static void initGlobalDB(std::string url, std::string schema);
+	DataBase(std::string url, std::string schema);
 
-	void updateEntity(const IEntity* ent) const;
-	void removeEntity(const IEntity* ent) const;
-	void createEntity(const IEntity* ent) const;
+	void updateEntity(const Entity* ent) const;
+	void removeEntity(const Entity* ent) const;
+	void createEntity(const Entity* ent) const;
 };
 
 using BDPointer = std::unique_ptr<DataBase>;

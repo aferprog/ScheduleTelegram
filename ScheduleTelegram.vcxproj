@@ -131,7 +131,7 @@
     <ClCompile Include="DataBase.cpp" />
     <ClCompile Include="Day.cpp" />
     <ClCompile Include="DayExtra.cpp" />
-    <ClCompile Include="IEntity.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Range.cpp" />
     <ClCompile Include="ScheduleTelegram.cpp" />
     <ClCompile Include="Week.cpp" />
@@ -141,7 +141,7 @@
     <ClInclude Include="DataBase.h" />
     <ClInclude Include="Day.h" />
     <ClInclude Include="DayExtra.h" />
-    <ClInclude Include="IEntity.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="Range.h" />
     <ClInclude Include="Week.h" />
   </ItemGroup>
