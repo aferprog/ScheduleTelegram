@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="Category.cpp" />
     <ClCompile Include="DataBase.cpp" />
+    <ClCompile Include="DataConverter.cpp" />
     <ClCompile Include="Day.cpp" />
     <ClCompile Include="DayExtra.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -139,6 +140,7 @@
   <ItemGroup>
     <ClInclude Include="Category.h" />
     <ClInclude Include="DataBase.h" />
+    <ClInclude Include="DataConverter.h" />
     <ClInclude Include="Day.h" />
     <ClInclude Include="DayExtra.h" />
     <ClInclude Include="Entity.h" />

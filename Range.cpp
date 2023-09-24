@@ -1,4 +1,5 @@
 ﻿#include "Range.h"
+#include "DataConverter.h"
 
 
 Range::Range(size_t day_info_id, std::tm begin)
@@ -19,7 +20,20 @@ vector<unique_ptr<Range>> Range::findByDayInfoId(size_t day_info_id)
     auto rows = t.select_ent({ "id", "categoty_id", "begin", "action" }, t.getTable(),
         "day_info_id=" + std::to_string(day_info_id), "begin"
     );
-    return vector<unique_ptr<Range>>();
+    vector<unique_ptr<Range>> res(rows.count());
+    int i = 0;
+    for (const auto& row : rows) {
+        res[i].reset(new Range);
+        res[i]->id = row[0];
+        res[i]->category_id = DataConverter::checkNull(row[1], SIZE_MAX);
+        res[i]->begin = DataConverter::bytesToTime(row[2].getRawBytes());
+        res[i]->action = DataConverter::checkNull<std::string>(row[3], "");
+        res[i]->day_info_id = day_info_id;
+
+        ++i;
+    }
+
+    return res;
 }
 
 size_t Range::getId() const {
@@ -46,16 +60,20 @@ const size_t Range::getDayInfoId() const
 
 Range& Range::setCategoryId(size_t newCategoryId) {
     category_id = newCategoryId;
+    addUpdate("category_id", newCategoryId);
     return *this;
 }
 
 Range& Range::setBegin(const std::tm& newBegin) {
     begin = newBegin;
+    
+    addUpdate("begin", DataConverter::tmTimeToString(begin));
     return *this;
 }
 
 Range& Range::setAction(const std::string& newAction) {
     action = newAction;
+    addUpdate("action", newAction);
     return *this;
 }
 
@@ -77,12 +95,8 @@ const vector<std::string> Range::getCreateField() const
 const mysqlx::Row Range::getCreateValues() const
 {
 
-    using std::to_string;
 
-    return mysqlx::Row{
-        to_string(begin.tm_hour)+":"+ to_string(begin.tm_min)+":"+ to_string(begin.tm_sec), 
-        day_info_id
-    };
+    return mysqlx::Row{DataConverter::tmTimeToString(begin), day_info_id};
 
 }
 

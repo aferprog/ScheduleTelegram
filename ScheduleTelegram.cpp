@@ -23,12 +23,10 @@ try {
     Session sess(url);
     Schema sch = sess.getSchema("schedule");
     Table table = sch.getTable("range");
-    auto res = table.select("begin", "id").orderBy("id").execute();
+    auto res = table.select("begin", "category_id").orderBy("id").execute();
     for (auto row : res) {
-        cout << row[1]<<" -> ";
-        for (auto t : row[0].getRawBytes())
-            printf("%hhu:", t);
-        puts("");
+        auto t =row[0];
+        cout << t<<endl;
     } 
     /*Row row;
     row.set(0, "12:00:00");

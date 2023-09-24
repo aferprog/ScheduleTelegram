@@ -25,6 +25,9 @@ protected:
 	virtual const vector<std::string> getUpdateFields() const;
 	virtual const mysqlx::Row GetUpdateRow() const;
 
+	template<typename ValueType>
+	const void addUpdate(std::string field, ValueType value);
+
 	virtual const vector<std::string> getCreateField() const = 0;
 	virtual const mysqlx::Row getCreateValues() const = 0;
 
@@ -39,3 +42,9 @@ public:
 
 };
 
+template<typename ValueType>
+inline const void Entity::addUpdate(std::string field, ValueType value)
+{
+	update_fields.push_back(field);
+	update_values[update_fields.size() - 1] = value;
+}
