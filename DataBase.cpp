@@ -20,7 +20,6 @@ DataBase::DataBase(string url, string schema)
 
 void DataBase::updateEntity(const Entity* ent) const
 {
-	
 	auto query = getTable(ent->getTable()).update();
 	auto fields = ent->getUpdateFields();
 	if (!fields.empty()) {

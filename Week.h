@@ -8,7 +8,7 @@
 class Week : public Entity
 {
 	
-	size_t user_id = -1;
+	size_t user_id = SIZE_MAX;
 	std::array<std::unique_ptr<Day>, 7> days;
 
 	Week(size_t user_id);

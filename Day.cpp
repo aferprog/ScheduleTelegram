@@ -35,12 +35,19 @@ size_t Day::getDayInfoId() const
 
 const std::vector<std::unique_ptr<Range>>& Day::getRanges() const
 {
+    if (ranges.size() > 0)
+        return ranges;
+    
+    const_cast<Day*>(this)->ranges = Range::findByDayInfoId(day_info_id);
     return ranges;
 }
 
 std::vector<std::unique_ptr<Range>>& Day::getRanges()
 {
-    return ranges;
+    if (ranges.size() > 0)
+        return ranges;
+
+    return ranges = Range::findByDayInfoId(day_info_id);
 }
 
 const vector<std::string> Day::getCreateField() const

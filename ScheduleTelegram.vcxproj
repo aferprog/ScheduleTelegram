@@ -128,24 +128,32 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Category.cpp" />
+    <ClCompile Include="CategoryController.cpp" />
     <ClCompile Include="DataBase.cpp" />
     <ClCompile Include="DataConverter.cpp" />
     <ClCompile Include="Day.cpp" />
+    <ClCompile Include="DayController.cpp" />
     <ClCompile Include="DayExtra.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Range.cpp" />
+    <ClCompile Include="RangeController.cpp" />
     <ClCompile Include="ScheduleTelegram.cpp" />
     <ClCompile Include="Week.cpp" />
+    <ClCompile Include="WeekController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Category.h" />
+    <ClInclude Include="CategoryController.h" />
     <ClInclude Include="DataBase.h" />
     <ClInclude Include="DataConverter.h" />
     <ClInclude Include="Day.h" />
+    <ClInclude Include="DayController.h" />
     <ClInclude Include="DayExtra.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Range.h" />
+    <ClInclude Include="RangeController.h" />
     <ClInclude Include="Week.h" />
+    <ClInclude Include="WeekController.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

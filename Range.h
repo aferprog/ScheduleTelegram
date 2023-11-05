@@ -11,8 +11,7 @@ using std::vector;
 
 class Range: public Entity {
 private:
-    size_t id;
-    size_t category_id, day_info_id;
+    size_t category_id = SIZE_MAX, day_info_id = SIZE_MAX;
     std::tm begin;
     std::string action;
     std::unique_ptr<Category> category;
@@ -23,6 +22,7 @@ private:
 public:
     // static unique_ptr<Range> findById(size_t id);
     static vector<unique_ptr<Range>> findByDayInfoId(size_t day_info_id);
+    static unique_ptr<Range> create(size_t day_info_id, std::tm begin);
 
     size_t getId() const override;
     size_t getCategoryId() const;

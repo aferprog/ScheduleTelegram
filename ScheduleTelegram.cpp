@@ -1,41 +1,81 @@
-#include <iostream>
-#include <mysqlx/xdevapi.h>
-#include <memory>
-#include "Week.h"
-#include "DataBase.h"
+﻿#include <csignal>
+#include <cstdio>
+#include <cstdlib>
+#include <exception>
+#include <string>
+#include <vector>
 
-using ::std::cout;
-using ::std::endl;
-using namespace ::mysqlx;
+#include <tgbot/tgbot.h>
 
-int main(int argc, const char* argv[])
-try {
+using namespace std;
+using namespace TgBot;
+
+class Record {
+public:
+    vector<string> messages;
+    string responce;
+    vector<string> tips;
+    int tip_ind;
+};
+
+std::vector<Record> tasks;
+int task_ind=0;
+
+void init() {
     
-    // DataBase::initGlobalDB("mysqlx://root:root@127.0.0.1", "schedule");
-
-    /*auto res = Week::getByUserId(13);
-
-    for (auto& week : res) {
-        week->remove();
-    }*/
-
-    const char* url = (argc > 1 ? argv[1] : "mysqlx://root:root@127.0.0.1");
-    Session sess(url);
-    Schema sch = sess.getSchema("schedule");
-    Table table = sch.getTable("range");
-    auto res = table.select("begin", "category_id").orderBy("id").execute();
-    for (auto row : res) {
-        auto t =row[0];
-        cout << t<<endl;
-    } 
-    /*Row row;
-    row.set(0, "12:00:00");
-    row.set(1, 167);
-    std::vector<std::string> f = { "begin", "day_info_id"};
-    Result res = table.insert(f).values(row).execute();*/
-
-    // cout << res.getAffectedItemsCount() << endl;
 }
-catch (const mysqlx::Error& err) {
-    cout << "ERROR: " << err << '\n';
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+    cout << "Тест";
+    // string token(getenv("TOKEN"));
+    string token = "1368992915:AAGQ_pMBwlWy7_HwKxpfAthFe9i78hKkI5Y";
+    printf("Token: %s\n", token.c_str());
+
+    Bot bot(token);
+
+    init();
+
+    pair<size_t, size_t> user = {0, 0};
+    bot.getEvents().onCommand("start", [&bot, &user](Message::Ptr message) {
+        if (user.first == 0) {
+            
+
+            user.first = message->chat->id;
+            bot.getApi().sendMessage(message->chat->id, "Привет. Я тебя ждал", false, 0);
+            bot.getApi().sendMessage(message->chat->id, "Меня зовут botik. А тебя я буду знать Олег", false, 0);
+            bot.getApi().sendMessage(message->chat->id, "Я спрятал здесь ключ, Олег. ", false, 0);
+            bot.getApi().sendMessage(message->chat->id, message->from->username, false, 0);
+        }
+               
+    });
+
+    bot.getEvents().onAnyMessage([&bot](Message::Ptr message) {
+        printf("User wrote %s\n", message->text.c_str());
+        if (StringTools::startsWith(message->text, "/start") || StringTools::startsWith(message->text, "/layout")) {
+            return;
+        }
+        bot.getApi().sendMessage(message->chat->id, "Your message is: " + message->text);
+        });
+
+    signal(SIGINT, [](int s) {
+        printf("SIGINT got\n");
+        exit(0);
+        });
+
+    try {
+        printf("Bot username: %s\n", bot.getApi().getMe()->username.c_str());
+        bot.getApi().deleteWebhook();
+
+        TgLongPoll longPoll(bot);
+        while (true) {
+            printf("Long poll started\n");
+            longPoll.start();
+        }
+    }
+    catch (exception& e) {
+        printf("error: %s\n", e.what());
+    }
+
+    return 0;
 }
