@@ -29,7 +29,7 @@ int main() {
     setlocale(LC_ALL, "Russian");
     cout << "Тест";
     // string token(getenv("TOKEN"));
-    string token = "1368992915:AAGQ_pMBwlWy7_HwKxpfAthFe9i78hKkI5Y";
+    string token = "token";
     printf("Token: %s\n", token.c_str());
 
     Bot bot(token);
